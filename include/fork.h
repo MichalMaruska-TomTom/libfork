@@ -30,6 +30,10 @@ extern Bool     ForkSetForkRepeat(
    Bool		        /* forkcode */
    );
 
+extern Bool 
+ForkSetLastKeysCount(
+    Display *dpy, unsigned int deviceSpec, int count);
+
 
 
 #if 1
