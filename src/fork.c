@@ -6,7 +6,7 @@
 
 
 /* shared with the server-side plugin: */
-#include <xorg/fork_requests.h>
+#include <X11/fork_requests.h>
 #include <X11/extensions/XKBproto.h>
 
 #include <stdlib.h>
@@ -15,12 +15,6 @@
 #include <assert.h>
 
 #include "fork.h"
-
-extern void XkbFreePipelineList(XkbPipelineListPtr list);
-extern Bool XkbPluginConfigure(Display *dpy, unsigned int deviceSpec,
-			       int plugin, int data[5]);
-
-
 
 /* return the ID of the plugin NAME, associated with XI DEVICE,
  * or 0 if not found. */
