@@ -8,6 +8,8 @@ ltmain.sh
 missing
 old
 src/old
-
+src/*la
+src/*lo
 fork.pc
 src/config.h
+debian/libfork
