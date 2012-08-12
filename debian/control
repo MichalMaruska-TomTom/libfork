@@ -2,12 +2,12 @@ Source: libfork
 Section: x11
 Priority: optional
 Maintainer: Michal Maruska <mmaruska@gmail.com>
-Build-Depends: cdbs, debhelper (>= 5), libx11-dev (= 2:1.4.4-2ubuntu1maruska1), fork-plugin, pkg-config
+Build-Depends: cdbs, debhelper (>= 5), libx11-dev (>= 2:1.5.0-1maruska1), fork-plugin, pkg-config
 Standards-Version: 3.7.2
 
 Package: libfork
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libx11-6 (= 2:1.4.4-2ubuntu1maruska1), fork-plugin
+Depends: ${shlibs:Depends}, ${misc:Depends}, libx11-6 (>= 2:1.5.0-1maruska1), fork-plugin
 Description: library with calls specific to commanding
  (configuring and getting information) the Fork plugin.
  
