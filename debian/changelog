@@ -1,8 +1,11 @@
-libfork (1.6.2) oneiric; urgency=low
+libfork (1.6.2) precise; urgency=low
 
   * depend explicitely on libX11 --- fixme
+  * auto
+  * build for Precise
+  * gitignore for building in-tree!
 
- -- Michal Maruska <mmaruska@gmail.com>  Sun, 23 Oct 2011 00:31:52 +0200
+ -- Michal Maruska <mmaruska@gmail.com>  Sat, 25 Aug 2012 22:39:11 +0200
 
 libfork (1.6.1) lucid; urgency=low
 
