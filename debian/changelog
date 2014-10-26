@@ -1,4 +1,4 @@
-libfork (1.6.2) precise; urgency=low
+libfork (1.6.2) precise unstable; urgency=low
 
   * depend explicitely on libX11 --- fixme
   * auto
