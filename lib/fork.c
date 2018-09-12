@@ -18,7 +18,7 @@
 /* return the ID of the plugin NAME, associated with XI DEVICE,
  * or 0 if not found. */
 static unsigned int
-find_plugin(Display* dpy, unsigned int device, char* name)
+find_plugin(Display* dpy, unsigned int device, const char* name)
 {
     int i;
     XkbPipelineListPtr p = XkbListPipeline(dpy, device);
