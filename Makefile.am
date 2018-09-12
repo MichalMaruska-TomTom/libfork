@@ -1,4 +1,4 @@
-SUBDIRS = lib
+SUBDIRS = lib src
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = fork.pc

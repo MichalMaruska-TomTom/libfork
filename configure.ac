@@ -22,4 +22,5 @@ PKG_CHECK_MODULES(libfork, [kbproto >= 1.0.4] [x11 >= 1.2.99.1])
 
 AC_OUTPUT([Makefile
            lib/Makefile
+           src/Makefile
            fork.pc])
