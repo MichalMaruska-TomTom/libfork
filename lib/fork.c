@@ -1,4 +1,3 @@
-
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
 #include <X11/extensions/XKB.h>
@@ -27,18 +26,18 @@ find_plugin(Display* dpy, unsigned int device, char* name)
     assert (p);
 #if DEBUG
     fprintf(stderr, "%d plugin%s in the pipeline\n",
-	    p->num_plugins,
-	    (p->num_plugins==0)?"":"s");
+            p->num_plugins,
+            (p->num_plugins==0)?"":"s");
 #endif
-   
+
     for(i= 0; i < p->num_plugins; i++)
     {
-	if (strcmp(name, p->plugins[i].name) == 0)
-	{
-	    unsigned int res = p->plugins[i].id;
-	    XkbFreePipelineList(p);
-	    return res;
-	}
+        if (strcmp(name, p->plugins[i].name) == 0)
+        {
+            unsigned int res = p->plugins[i].id;
+            XkbFreePipelineList(p);
+            return res;
+        }
     }
     XkbFreePipelineList(p);
     return 0;
@@ -52,10 +51,10 @@ fork_plugin_id(Display* dpy, unsigned int device)
     static unsigned int plugin = 0;
 
     if (plugin)
-	return plugin;
+        return plugin;
     else
     {
-	return plugin = find_plugin(dpy, device, FORK_PLUGIN_NAME);
+        return plugin = find_plugin(dpy, device, FORK_PLUGIN_NAME);
     }
 }
 
@@ -69,14 +68,14 @@ fork_plugin_id(Display* dpy, unsigned int device)
 #define LOCAL_OPTION 1
 #define TWIN_OPTION 2
 
-Bool 
+Bool
 ForkConfigure(Display *dpy, unsigned int device, int what, int value)
 {
 
    int data[5];
    data[0] = what << 2 | GLOBAL_OPTION;
    data[1] = value;
-   
+
    return XkbPluginConfigure(dpy, device, fork_plugin_id(dpy, device), data);
 }
 
@@ -96,16 +95,16 @@ ForkGetConfigure(Display *dpy, unsigned int device, int what, int* ret)
 
 
 /* config of 2 keys: overlap between them, or ?? whatever !! */
-Bool 
+Bool
 ForkConfigureKeyTwin(Display *dpy, unsigned int device, int what,
-		     KeyCode code, KeyCode twin, int value)
+                     KeyCode code, KeyCode twin, int value)
 {
    int data[5];
    data[0] = what << 2 | TWIN_OPTION;
    data[1] = code;
    data[2] = twin;
    data[3] = value;
-   
+
    return XkbPluginConfigure(dpy, device, fork_plugin_id(dpy, device), data);
 }
 
@@ -124,22 +123,22 @@ ForkGetConfigureKeyTwin(Display *dpy, unsigned int device, int what, KeyCode cod
    return status;
 }
 
-Bool 
+Bool
 ForkConfigureKey(Display *dpy, unsigned int device, int what, KeyCode code,
-		 int value)
+                 int value)
 {
    int data[5];
    data[0] = what << 2 | LOCAL_OPTION;
    data[1] = code;
    data[2] = value;
-   
+
    return XkbPluginConfigure(dpy, device, fork_plugin_id(dpy, device), data);
 }
 
 
 int
 ForkGetConfigureKey(Display *dpy, unsigned int device, int what, KeyCode code,
-		    int* ret)
+                    int* ret)
 {
    int data[5];
    int rets[3];
@@ -158,7 +157,7 @@ ForkGetConfigureKey(Display *dpy, unsigned int device, int what, KeyCode code,
 
 
 
-Bool 
+Bool
 ForkSetFork(Display *dpy, unsigned int deviceSpec, KeyCode code, KeyCode fork)
 {
    /* deviceSpec */
@@ -168,7 +167,7 @@ ForkSetFork(Display *dpy, unsigned int deviceSpec, KeyCode code, KeyCode fork)
 
 
 
-Bool 
+Bool
 ForkSetForkRepeat(Display *dpy, unsigned int deviceSpec, KeyCode code, Bool repeat)
 {
    /* deviceSpec */
@@ -192,7 +191,7 @@ ForkSetLastKeysCount(Display *dpy, unsigned int deviceSpec, int count)
 
 Bool                            /* todo:   `PluginCommand_get_reply' */
 ForkGetLastEvents(Display *dpy, unsigned int device, int count,
-		  int* returned, archived_event** events)
+                  int* returned, archived_event** events)
 {
     fork_events_reply* reply;
     int answer_len;
@@ -200,37 +199,36 @@ ForkGetLastEvents(Display *dpy, unsigned int device, int count,
     /* The magic command: */
     int data[2]; /* = "abcd";              fixme:count!  nothning */
     /* int len = strlen(data);*/
-   
+
     /* fixme: byte-swap! */
     data[0] = fork_client_dump_keys; /* what << 2 | 0;*/
     data[1] = count;
 
     status = XkbPluginCommand(dpy, device,
-			      fork_plugin_id(dpy, device),
-			      2 * sizeof(int), (char*) data, /* fixme! */
-			      &answer_len, (char**) &reply);  /* fixme! */
+                              fork_plugin_id(dpy, device),
+                              2 * sizeof(int), (char*) data, /* fixme! */
+                              &answer_len, (char**) &reply);  /* fixme! */
 
     /* todo! */
     /* Check that the # of events < count */
     if (status == Success)
     {
-	*returned = answer_len / sizeof(archived_event);
-         
+        *returned = answer_len / sizeof(archived_event);
 
-	printf("got %d  == %d events.\n",  *returned, reply->count);
-	/* fixme: */
-	*events = malloc(*returned * sizeof(archived_event));
-	memcpy(*events, reply->e, *returned * sizeof(archived_event));
-	/* XKBFree ? */
-	XFree(reply);
-#if 0         
-	/* extract the events! */
-	int i;
-	for(i = 0; i < *returned; i++)
-	{
-	}
+
+        printf("got %d  == %d events.\n",  *returned, reply->count);
+        /* fixme: */
+        *events = malloc(*returned * sizeof(archived_event));
+        memcpy(*events, reply->e, *returned * sizeof(archived_event));
+        /* XKBFree ? */
+        XFree(reply);
+#if 0
+        /* extract the events! */
+        int i;
+        for(i = 0; i < *returned; i++)
+        {
+        }
 #endif
     }
     return True;
 }
-
