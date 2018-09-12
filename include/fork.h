@@ -15,9 +15,9 @@
 
 extern	Bool    ForkSetFork(
    Display *		/* dpy */,
-   unsigned int 		/* deviceSpec */,
-   KeyCode		        /* code */,
-   KeyCode		        /* forkcode */
+   unsigned int                 /* deviceSpec */,
+   KeyCode                      /* code */,
+   KeyCode                      /* forkcode */
    );
 
 
@@ -27,10 +27,10 @@ extern Bool     ForkSetForkRepeat(
    Display *		/* dpy */,
    unsigned int         /* deviceSpec */,
    KeyCode              /* code */,
-   Bool		        /* forkcode */
+   Bool                 /* forkcode */
    );
 
-extern Bool 
+extern Bool
 ForkSetLastKeysCount(
     Display *dpy, unsigned int deviceSpec, int count);
 
@@ -39,7 +39,7 @@ ForkSetLastKeysCount(
 #if 1
 extern Bool
 ForkGetLastEvents(Display *dpy, unsigned int deviceSpec, int count,
-		  int* returned, archived_event** events);
+                  int* returned, archived_event** events);
 #endif
 
 
@@ -58,7 +58,7 @@ ForkGetConfigureKey(Display *dpy, unsigned int device, int what, KeyCode code, i
 
 extern int
 ForkGetConfigureKeyTwin(Display *dpy, unsigned int device, int what, KeyCode code,
-			KeyCode twin, int* ret);
+                        KeyCode twin, int* ret);
 
 
 
@@ -72,14 +72,12 @@ extern Bool ForkConfigure(
 
 extern Bool
 ForkConfigureKey(Display *dpy,
-		 unsigned int device, int what, KeyCode code, int value);
+                 unsigned int device, int what, KeyCode code, int value);
 
 extern Bool
 ForkConfigureKeyTwin(Display *dpy, unsigned int device,
-		     int what, KeyCode code, KeyCode twin, int value);
+                     int what, KeyCode code, KeyCode twin, int value);
 
 
 
 #endif /* FORK_H */
-
-
