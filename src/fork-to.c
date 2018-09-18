@@ -1,4 +1,6 @@
 #include <X11/Xlib.h>
+
+#include <X11/fork_requests.h>
 #include <X11/extensions/fork.h>
 
 // todo:
@@ -6,31 +8,36 @@
 
 int main()
 {
-  Display* x=XOpenDisplay(":0");
+  // use getenv(DISPLAY):
+  Display* dpy = XOpenDisplay(NULL);
+  unsigned int device = 3;
+  // todo
+  //getopt -d number  .. the keyboard
+  //
   // l f-> hyper
-  ForkSetFork(x, 3, 41, 61);
-  ForkSetFork(x, 3, 46, 61);
+  ForkSetFork(dpy, device, 41, 61);
+  ForkSetFork(dpy, device, 46, 61);
 
   // k a -> group 2
-  ForkSetFork(x, 3, 38, 66);
-  ForkSetFork(x, 3, 45, 66);
+  ForkSetFork(dpy, device, 38, 66);
+  ForkSetFork(dpy, device, 45, 66);
 
   // m c -> group 2
-  ForkSetFork(x, 3, 58, 109);
-  ForkSetFork(x, 3, 54, 109);
+  ForkSetFork(dpy, device, 58, 109);
+  ForkSetFork(dpy, device, 54, 109);
 
-  // d j -> group 3
-  ForkSetFork(x, 3, 40, 109);
-  ForkSetFork(x, 3, 44, 109);
+  // d j -> group device
+  ForkSetFork(dpy, device, 40, 109);
+  ForkSetFork(dpy, device, 44, 109);
 
 
   // s -> alt
-  ForkSetFork(x, 3, 39, 192);
+  ForkSetFork(dpy, device, 39, 192);
 
   // space v -> shift
-  ForkSetFork(x, 3, 65, 37);
-  ForkSetFork(x, 3, 55, 37);
-  ForkSetFork(x, 3, 47, 37); // ??
+  ForkSetFork(dpy, device, 65, 37);
+  ForkSetFork(dpy, device, 55, 37);
+  ForkSetFork(dpy, device, 47, 37); // ??
 
 
   // meta/esc -> meta:
@@ -43,9 +50,9 @@ int main()
   // 08?
   //  alt   20
   // hyper  80
-  ForkSetFork(x, 3, 64, 205);
-  XFlush(x);
-  // XClose(x);
+  ForkSetFork(dpy, device, 64, 205);
 
+  ForkConfigure(dpy, device, fork_configure_debug, 0);
+  XFlush(dpy);
   return 0;
  }
