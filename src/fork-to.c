@@ -1,58 +1,61 @@
+#include <stdio.h>
+#include <unistd.h>
+
 #include <X11/Xlib.h>
 
 #include <X11/fork_requests.h>
 #include <X11/extensions/fork.h>
 
-// todo:
-// read from stdin "a b", and "fork a to b"
 
-int main()
+// read from stdin "a b", and "fork a to b"
+void fork_from_stdin(Display *dpy, unsigned int device)
+{
+  int from, to;
+  int count;
+
+  while (EOF != (count = scanf("%d %d\n", &from, &to))) {
+      // printf("items %d\n", count);
+      if (count == 2) {
+        printf("fork %d to %d\n", from, to);
+        ForkSetFork(dpy, device, from, to);
+      } else {
+          // skip to \n
+          char c;
+          while ((c = getchar()) != '\n'){
+              if (c == EOF) {
+                break;
+              }
+          }
+      }
+  }
+}
+
+
+
+int main(int argc, char * const argv[])
 {
   // use getenv(DISPLAY):
+  int debug = 0;
+
+  int next;
+  while ((next = getopt(argc, argv, "d")) > -1) {
+    if (next == '\?') {
+      printf("unexpected option \n");
+      return 1;
+    } else if (next == 'd') {
+      // printf("next: %d %c\n", optind, next);
+      debug = 1;
+    }
+  }
+
+  printf("now reading the config on stdin\n");
   Display* dpy = XOpenDisplay(NULL);
   unsigned int device = 3;
-  // todo
-  //getopt -d number  .. the keyboard
-  //
-  // l f-> hyper
-  ForkSetFork(dpy, device, 41, 61);
-  ForkSetFork(dpy, device, 46, 61);
 
-  // k a -> group 2
-  ForkSetFork(dpy, device, 38, 66);
-  ForkSetFork(dpy, device, 45, 66);
+  fork_from_stdin(dpy, device);
 
-  // m c -> group 2
-  ForkSetFork(dpy, device, 58, 109);
-  ForkSetFork(dpy, device, 54, 109);
+  ForkConfigure(dpy, device, fork_configure_debug, debug);
 
-  // d j -> group device
-  ForkSetFork(dpy, device, 40, 109);
-  ForkSetFork(dpy, device, 44, 109);
-
-
-  // s -> alt
-  ForkSetFork(dpy, device, 39, 192);
-
-  // space v -> shift
-  ForkSetFork(dpy, device, 65, 37);
-  ForkSetFork(dpy, device, 55, 37);
-  ForkSetFork(dpy, device, 47, 37); // ??
-
-
-  // meta/esc -> meta:
-  // 64 must be Escape, and fork to some Meta.
-  // Meta is
-
-  // Control 04
-  // shift   01
-  // caps    02
-  // 08?
-  //  alt   20
-  // hyper  80
-  ForkSetFork(dpy, device, 64, 205);
-
-  ForkConfigure(dpy, device, fork_configure_debug, 0);
   XFlush(dpy);
   return 0;
  }
