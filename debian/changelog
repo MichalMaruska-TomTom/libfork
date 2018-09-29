@@ -1,3 +1,12 @@
+libfork (1.7.1) unstable; urgency=medium
+
+  * drop autogen.sh
+  * fix pkg-config
+  * Use DISPLAY, device 3, and turn off debug.
+  * Parse the -d option (to debug) and the config on stdin.
+
+ -- Michal Maruska <mmaruska@gmail.com>  Sat, 29 Sep 2018 19:37:20 +0200
+
 libfork (1.7) unstable; urgency=medium
 
   * move the library sources into separate lib/
