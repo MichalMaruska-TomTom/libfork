@@ -7,7 +7,7 @@
 
 #include <X11/Xlib.h>
 
-#include <X11/fork_requests.h>
+#include <xorg/fork_requests.h>
 #include <X11/extensions/fork.h>
 
 

@@ -5,7 +5,7 @@
 
 
 /* shared with the server-side plugin: */
-#include <X11/fork_requests.h>
+#include <xorg/fork_requests.h>
 #include <X11/extensions/XKBproto.h>
 
 #include <stdlib.h>
