@@ -1,3 +1,10 @@
+libfork (1.7.2) unstable; urgency=medium
+
+  * Add usage (-h), the -k [num] option.
+  * use md for README
+
+ -- Michal Maruska <mmaruska@gmail.com>  Wed, 05 Aug 2020 00:02:30 +0200
+
 libfork (1.7.1) unstable; urgency=medium
 
   * drop autogen.sh
