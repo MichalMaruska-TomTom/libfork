@@ -7,8 +7,8 @@
 
 #include <X11/Xlib.h>
 
-#include <xorg/fork_requests.h>
-#include <X11/extensions/fork.h>
+// X11/extensions/
+#include <fork.h>
 
 
 // read from stdin "a b", and "fork a to b"

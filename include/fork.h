@@ -10,7 +10,7 @@
 
 
 /* stuff shared with the server */
-#include <xorg/fork_requests.h>
+#include <fork_requests.h>
 
 
 extern	Bool    ForkSetFork(
