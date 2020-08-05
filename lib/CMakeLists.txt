@@ -6,10 +6,6 @@ find_package(PkgConfig)
 pkg_search_module(xorg-server REQUIRED xorg-server
   IMPORTED_TARGET GLOBAL)
 
-# fixme: xorg sdk needs this, we don't!
-# pkg_search_module(pixman REQUIRED pixman-1 IMPORTED_TARGET GLOBAL)
-
-
 set(CMAKE_DEBUG_TARGET_PROPERTIES
   #INCLUDE_DIRECTORIES
   # COMPILE_DEFINITIONS
@@ -32,7 +28,6 @@ set_target_properties(libfork PROPERTIES PREFIX "")
 # /usr/lib/x86_64-linux-gnu/pkgconfig/xorg-server.pc
 # or SDK?
 target_include_directories(libfork SYSTEM PUBLIC ${xorg-server_INCLUDE_DIRS})
-# target_include_directories(libfork SYSTEM PUBLIC ${pixman_INCLUDE_DIRS})
 
 target_include_directories(libfork PUBLIC ../include/)
 
