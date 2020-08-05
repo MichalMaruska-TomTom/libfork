@@ -1,3 +1,15 @@
+libfork (1.7.3) unstable; urgency=medium
+
+  * Add the CMake build system
+  * CMake --fix
+  * drop pixman from cmake
+  * debian/compat 10
+  * drop the autotools build system
+  * debian: use the cmake build system, disable tests
+  * Drop xorg/ from the #include names
+
+ -- Michal Maruska <mmaruska@gmail.com>  Wed, 05 Aug 2020 19:36:40 +0200
+
 libfork (1.7.2) unstable; urgency=medium
 
   * Add usage (-h), the -k [num] option.
