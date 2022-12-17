@@ -2,7 +2,7 @@ Source: libfork
 Section: x11
 Priority: optional
 Maintainer: Michal Maruska <mmaruska@gmail.com>
-Build-Depends: debhelper (>= 5), libx11-dev (>= 2:1.5.0-1maruska1), fork-plugin, pkg-config
+Build-Depends: debhelper (>= 5), libx11-dev (>= 1.8.1-1-maruska), fork-plugin, pkg-config, cmake, ninja-build
 Standards-Version: 3.7.2
 
 Package: libfork
